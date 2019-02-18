@@ -1,14 +1,39 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+<ion-header style = "background-color: #4C5B5C">
+  <ion-toolbar style = "background-color: #4C5B5C">
+      <ion-title style = "background-color: #4C5B5C">
+        Juegos
+      </ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click) = "Search()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding style = "background-color: #FF715B">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor = "let j of juegos" col-4>
+        <ion-card (click) = "VerJuego(j)">
+          <img *ngIf = "j.ad.hasOwnProperty('thumbnail')" src="https://img.segundamano.mx/cover/{{j.ad.thumbnail.path}}">
+          <img *ngIf = "j.ad.hasOwnProperty('thumbnail') == false" src="../assets/Generica.jpg">
+          <ion-card-content>
+             <h1 *ngIf = "j.ad.hasOwnProperty('subject')">
+                {{j.ad.subject}}
+            </h1>
+            <p>
+                {{j.ad.locations[0].locations[0].label}} , {{j.ad.locations[0].label}}
+            </p>
+              <h2 *ngIf = "j.ad.hasOwnProperty('list_price')">
+                {{j.ad.list_price.label}}
+              </h2> 
+              <p *ngIf = "j.ad.hasOwnProperty('list_time')">
+                Publicado el {{j.ad.list_time.label}}
+              </p>
+           </ion-card-content> 
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
